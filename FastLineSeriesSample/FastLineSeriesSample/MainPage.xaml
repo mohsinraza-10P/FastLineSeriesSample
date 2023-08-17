@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    x:Class="FastLineSeriesSample.MainPage"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+    xmlns:local="clr-namespace:FastLineSeriesSample">
+    
+    <ContentPage.BindingContext>
+	    <local:ViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout>
+        <Frame BackgroundColor="#2196F3" Padding="25,50,25,25" CornerRadius="0">
+            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+
+        <chart:SfChart
+            HeightRequest="300"
+            Margin="10"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            ChartPadding="25"
+            BackgroundColor="Transparent"
+            AreaBackgroundColor="WhiteSmoke">
+
+            <chart:SfChart.PrimaryAxis>
+                <chart:DateTimeAxis
+                    Interval="1"
+                    IntervalType="Hours"
+                    EdgeLabelsDrawingMode="Hide" 
+                    LabelsIntersectAction="None"
+                    ShowMajorGridLines="False">
+
+                    <chart:DateTimeAxis.LabelStyle>
+                        <chart:ChartAxisLabelStyle
+                            FontSize="12"
+                            TextColor="Gray"
+                            LabelAlignment="Center"
+                            LabelFormat="hh&#x0a;tt" />
+                    </chart:DateTimeAxis.LabelStyle>
+                </chart:DateTimeAxis>
+            </chart:SfChart.PrimaryAxis>
+
+            <chart:SfChart.SecondaryAxis>
+                <chart:NumericalAxis
+                    Interval="10"
+                    Minimum="0"
+                    Maximum="50">
+
+                    <chart:NumericalAxis.LabelStyle>
+                        <chart:ChartAxisLabelStyle
+                            FontSize="12"
+                            TextColor="Gray" />
+                    </chart:NumericalAxis.LabelStyle>
+                </chart:NumericalAxis>
+            </chart:SfChart.SecondaryAxis>
+            
+           <chart:SfChart.Series>
+                <chart:FastLineSeries
+                    x:Name="DataSeries"
+                    ItemsSource="{Binding DataPointsSource}"
+                    XBindingPath="DateTime"
+                    YBindingPath="Value"
+                    EnableTooltip ="True"
+                    EnableDataPointSelection="True"
+                    Color="Orange" />
+           </chart:SfChart.Series>
+
+        </chart:SfChart>
+    </StackLayout>
+</ContentPage>
