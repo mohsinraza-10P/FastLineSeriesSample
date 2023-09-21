@@ -15,6 +15,9 @@
             <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
 
+        <ScrollView>
+
+
         <chart:SfChart
             HeightRequest="300"
             Margin="10"
@@ -28,9 +31,8 @@
                 <chart:DateTimeAxis
                     Interval="1"
                     IntervalType="Hours"
-                    EdgeLabelsDrawingMode="Hide" 
                     LabelsIntersectAction="None"
-                    ShowMajorGridLines="False">
+                    ShowMajorGridLines="True">
 
                     <chart:DateTimeAxis.LabelStyle>
                         <chart:ChartAxisLabelStyle
@@ -68,5 +70,6 @@
            </chart:SfChart.Series>
 
         </chart:SfChart>
+        </ScrollView>
     </StackLayout>
 </ContentPage>

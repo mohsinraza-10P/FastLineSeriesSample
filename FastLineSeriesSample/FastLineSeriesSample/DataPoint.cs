@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace FastLineSeriesSample
 {
-	public class DataPoint
-	{
-		public DataPoint(DateTime dateTime, double? value)
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    public class DataPoint
+    {
+        public DataPoint(DateTime dateTime, double? value)
         {
             DateTime = dateTime;
             Value = value;
@@ -13,6 +15,8 @@ namespace FastLineSeriesSample
         public DateTime DateTime { get; }
 
         public double? Value { get; }
+
+        public string DebuggerDisplay => $"{DateTime} | {Value}";
     }
 }
 

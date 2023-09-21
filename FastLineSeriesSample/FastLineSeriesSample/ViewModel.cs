@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace FastLineSeriesSample
 {
@@ -10,21 +11,37 @@ namespace FastLineSeriesSample
         public ViewModel()
 		{
             var now = DateTime.Now;
-            var value = 5;
-
-            DataPointsSource = new List<DataPoint>()
-            {
-                new DataPoint(now, value * 1),
-                new DataPoint(now.AddHours(1), value * 1.5),
-                new DataPoint(now.AddHours(2), value * 2),
-                new DataPoint(now.AddHours(3), value * 2.5),
-                new DataPoint(now.AddHours(4), value * 3),
-                new DataPoint(now.AddHours(5), value * 3.5),
-                new DataPoint(now.AddHours(6), value * 4),
-                new DataPoint(now.AddHours(7), value * 4.5),
-                new DataPoint(now.AddHours(8), value * 5),
-            };
+            var startDate = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
+            DataPointsSource = GenerateDataSource(startDate, 24);
         }
-	}
+
+        private List<DataPoint> GenerateDataSource(DateTime startDate, int numberOfHours)
+        {
+            var rand = new Random();
+            var multiplier = 5;
+            var dataPoints = new List<DataPoint>();
+
+            for (int i = 0; i <= numberOfHours; i++)
+            {
+                if (i == 0)
+                {
+                    continue;
+                }
+
+                var value = multiplier * rand.Next(10, 40) * 0.25;
+                var dp = new DataPoint(startDate.AddHours(i), value);
+                dataPoints.Add(dp);
+            }
+
+            dataPoints.Insert(0, new DataPoint(startDate, null));
+
+            foreach (var dp in dataPoints)
+            {
+                Debug.WriteLine($"DataPoint = {dp.DebuggerDisplay}");
+            }
+
+            return dataPoints;
+        }
+    }
 }
 
